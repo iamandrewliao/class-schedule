@@ -1,0 +1,14 @@
+course,title,creds,class_days,class_time_start,class_time_end,interest_lvl,ratemyprof,avg_grade
+CSCI 5541,Natural Language Processing,3,"Tu, Th",2:30 PM,3:45 PM,7,NA,3.704
+CSCI 8980-001,Machine Learning for Healthcare,3,"Mo, We",1:00 PM,2:15 PM,10,NA,3.818
+CSCI 8980-003,Human-AI Interactions,3,"Mo, We",4:00 PM,5:15 PM,10,NA,3.818
+PSY 8036,Topics in Computational Vision,3,Tu,3:00 PM,5:00 PM,9,NA,4
+BMEN 5151,Introduction to BioMEMS and Medical Microdevices,2,Th,3:35 PM,5:30 PM,10,5,3.855
+EE 5235,Robust Control System Design,3,"Tu, Th",8:15 AM,9:30 AM,8,5,3.548
+ME 3222,Mechanisms & Machine Design,4,"Tu, Th",2:30 AM,3:45 PM,10,4.8,3.29
+ME 5248,Vibration Engineering,4,"We, Fr",8:00 AM,9:55 AM,6,4.5,3.237
+EE 8231,Optimization Theory,3,"Tu, Th",8:15 AM,9:30 AM,8,3.9,3.81
+MATH 5466,Mathematics of Machine Learning and Data Analysis II,4,"Mo, We",12:20 PM,2:15 PM,8,3.8,3.314
+EE 8215,Nonlinear Systems,3,"We, Fr",2:30 PM,3:45 PM,7,3.4,3.667
+CSCI 5512,Artificial Intelligence II,3,"Tu, Th",5:45 PM,7:00 PM,6,3,3.4
+CSCI 8980-002,Current Research in VR/AR,1,"Mo, We",2:30 PM,3:45 PM,9,2.6,3.818
