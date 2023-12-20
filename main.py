@@ -83,7 +83,7 @@ def count_creds(schedule):
         creds += data[data.classes == cls].creds.values[0]
     return creds
 
-def credit_limit_metric(schedule, desired_creds):  # penalize schedules that have a total credit amt != our desired amt
+def credit_metric(schedule, desired_creds):  # penalize schedules that have a total credit amt != our desired amt
     creds = count_creds(schedule)
     metric = -1*(creds-desired_creds)**2  # penalizes exponentially ~ -x^2
     return metric
@@ -179,7 +179,7 @@ def avg_avg_grade_metric(schedule):  # average avg_grade across classes
 #         else:
 #             cur_schedule[idx_to_day[iterate_schedule]] = [day_schedule]
 #         iterate_schedule += 1
-#     schedule_metrics["credit_limit"] = credit_limit_metric(cur_schedule, desired_credits)
+#     schedule_metrics["credit"] = credit_metric(cur_schedule, desired_credits)
 #     schedule_metrics["overlap"] = overlap_metric(cur_schedule)
 #     schedule_metrics["early"] = early_metric(cur_schedule)
 #     schedule_metrics["num_classes_daily"] = num_classes_daily_metric(cur_schedule)
@@ -216,7 +216,7 @@ def avg_avg_grade_metric(schedule):  # average avg_grade across classes
 # The coefficients we find from multiple regression are:
 regression_coeffs = [10.2731, 0.2370, 6.0287, 4.718e-06, 0.2598, 2.1757, 0.0245, -6.0618]
 # corresponding to the intercept and the metrics:
-# [intercept, credit_limit, overlap, early, num_classes_daily, avg_interest_lvl, avg_ratemyprof, avg_avg_grade]
+# [intercept, credit, overlap, early, num_classes_daily, avg_interest_lvl, avg_ratemyprof, avg_avg_grade]
 # Our adjusted R-squared is good!
 
 def obj_func(schedule, regression_coefficients):  # construct the obj_func from our regression results
@@ -225,7 +225,7 @@ def obj_func(schedule, regression_coefficients):  # construct the obj_func from 
     score += intercept
     # print(score)
     metric_coeffs = regression_coefficients[1:]
-    metrics_array = [credit_limit_metric(schedule, desired_credits),
+    metrics_array = [credit_metric(schedule, desired_credits),
                      overlap_metric(schedule),
                      early_metric(schedule),
                      num_classes_daily_metric(schedule),
@@ -309,7 +309,7 @@ def first_choice_hill_climbing(state, max_iter):
 
 schedule_hillclimb, score_hillclimb = first_choice_hill_climbing(start_schedule, iterations)
 # print(score_hillclimb)
-# print("score components: ", [credit_limit_metric(schedule_hillclimb, desired_credits),
+# print("score components: ", [credit_metric(schedule_hillclimb, desired_credits),
 #                              overlap_metric(schedule_hillclimb),
 #                              early_metric(schedule_hillclimb),
 #                              num_classes_daily_metric(schedule_hillclimb),
