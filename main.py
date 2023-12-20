@@ -6,6 +6,7 @@ import math
 import numpy as np
 from datetime import datetime
 import itertools
+import time
 from sklearn import linear_model
 import statsmodels.api as sm
 
@@ -139,6 +140,12 @@ def avg_ratemyprof_metric(schedule):  # average ratemyprof reviews across classe
     for cls in classes:
         ratings.append(data[data.classes == cls].ratemyprof.values[0])
     return np.nanmean(ratings)  # to get the average
+
+# n1 = float("nan")
+# n2 = float("Nan")
+# n3 = float("NaN")
+# test_nan = [n1, n2, n3]
+# print(np.nanmean(test_nan))
 
 # print(avg_ratemyprof_metric(start_schedule))
 
@@ -307,7 +314,6 @@ def first_choice_hill_climbing(state, max_iter):
             current_score = score
     return current_state, current_score
 
-schedule_hillclimb, score_hillclimb = first_choice_hill_climbing(start_schedule, iterations)
 # print(score_hillclimb)
 # print("score components: ", [credit_metric(schedule_hillclimb, desired_credits),
 #                              overlap_metric(schedule_hillclimb),
@@ -367,21 +373,25 @@ def simulated_annealing(state, cooling_schedule, max_iter):
             best_state = current_state
     return best_state, best_score
 
+start = time.time()
+schedule_hillclimb, score_hillclimb = first_choice_hill_climbing(start_schedule, iterations)
 schedule_simann, score_simann = simulated_annealing(start_schedule, 'logarithmic', iterations)
+end = time.time()
 
 scores = [score_hillclimb, score_simann]
 
-print("Best Schedule Found:\n")
+print(f"Best schedule found in {round((end-start),2)} seconds:\n")
 if max(scores) == score_hillclimb:
     print("Algorithm: First Choice Hill Climbing\n")
     print(f"After {iterations} iterations\n"
           f"Schedule found with First-Choice Hill Climbing: {schedule_hillclimb}\n"
-          f"Score: {score_hillclimb}\n"
-          f"Creds: {count_creds(schedule_hillclimb)}")
+          # f"Score: {score_hillclimb}\n"
+          f"Credits: {count_creds(schedule_hillclimb)}")
 else:
     print("Algorithm: Simulated Annealing\n")
     print(f"After {iterations} iterations\n"
           f"Schedule found with Simulated Annealing: {schedule_simann}\n"
-          f"Score: {score_simann}\n"
-          f"Creds: {count_creds(schedule_simann)}")
+          f"Schedule found with Simulated Annealing: {schedule_simann}\n"
+          # f"Score: {score_simann}\n"
+          f"Credits: {count_creds(schedule_simann)}")
 
